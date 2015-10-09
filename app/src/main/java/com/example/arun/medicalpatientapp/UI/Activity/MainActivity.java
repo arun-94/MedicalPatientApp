@@ -1,11 +1,13 @@
-package com.example.arun.medicalpatientapp;
+package com.example.arun.medicalpatientapp.UI.Activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity
+import com.example.arun.medicalpatientapp.R;
+import com.parse.ParseUser;
+
+public class MainActivity extends BaseActivity
 {
     //AppManager appManager;
 
@@ -13,7 +15,25 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ParseUser.getCurrentUser().fetchInBackground();
+    }
+
+    @Override
+    protected int getLayoutResource()
+    {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void setupToolbar()
+    {
+
+    }
+
+    @Override
+    protected void setupLayout()
+    {
+
     }
 
     @Override

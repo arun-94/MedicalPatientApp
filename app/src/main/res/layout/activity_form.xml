@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    >
+<LinearLayout
+    android:id="@+id/linearLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="265dp"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:orientation="vertical"
+    android:paddingBottom="60dp"
+    android:gravity="center_horizontal">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/editText_patient_phone_number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-medium"
+        android:hint="Enter Mobile Number"
+        android:inputType="textNoSuggestions|phone"
+        android:maxLines="1"
+        android:minLines="1"
+        android:textSize="20sp"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/editText_patient_age"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-medium"
+        android:hint="Enter Age"
+        android:maxLines="1"
+        android:minLines="1"
+        android:textSize="20sp"
+        android:inputType="number|textNoSuggestions"/>
+
+
+    <Button
+        android:id="@+id/saveDetails"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/com_facebook_blue"
+        android:text="Save Details"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="10dp"/>
+</LinearLayout>
+    </RelativeLayout>
