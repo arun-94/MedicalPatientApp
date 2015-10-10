@@ -101,7 +101,7 @@ public class LoginActivity extends BaseActivity
                 }
                 else
                 {
-                    Log.d(LOG_TAG, e.getMessage());
+                    Log.d(LOG_TAG, "Login Failed" + e.getMessage());
                     // Signup failed. Look at the ParseException to see what happened.
                 }
             }
