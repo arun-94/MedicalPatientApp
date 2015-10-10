@@ -3,6 +3,7 @@ package com.example.arun.medicalpatientapp.UI.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -88,6 +89,7 @@ public class LoginActivity extends BaseActivity
                 if (user == null)
                 {
                     Log.e(LOG_TAG, "Uh oh. The user cancelled the Facebook login.");
+                    Toast.makeText(LoginActivity.this, "No Internet. Login Failed.", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -130,6 +132,7 @@ public class LoginActivity extends BaseActivity
                 else
                 {
                     Log.d(LOG_TAG, "Login Failed" + e.getMessage());
+                    Toast.makeText(LoginActivity.this, "No Internet. Login Failed.", Toast.LENGTH_SHORT).show();
                     // Signup failed. Look at the ParseException to see what happened.
                 }
             }
@@ -164,7 +167,7 @@ public class LoginActivity extends BaseActivity
                     User currentUser = (User) ParseUser.getCurrentUser();
                     try
                     {
-                        //userProfile.put("facebookId", jsonObject.getLong("id"))
+                        currentUser.put("facebookId", jsonObject.getLong("id"));
                         currentUser.setName(jsonObject.getString("name"));
 
                         if (jsonObject.getString("gender") != null)
