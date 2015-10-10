@@ -8,10 +8,8 @@ import android.util.Log;
 import com.example.arun.medicalpatientapp.Constants;
 import com.example.arun.medicalpatientapp.R;
 import com.example.arun.medicalpatientapp.UI.Adapter.PrescriptionAdapter;
-import com.example.arun.medicalpatientapp.UI.ParseObjects.Prescription;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 
 public class PrescriptionListActivity extends BaseActivity
 {
@@ -48,12 +46,6 @@ public class PrescriptionListActivity extends BaseActivity
         mRecyclerView.setLayoutManager(llm);
         mAdapter = new PrescriptionAdapter(PrescriptionListActivity.this, null);
         mRecyclerView.setAdapter(mAdapter);
-    }
-
-    @OnClick(R.id.fab_addPrescription)
-    void AddPrescription()
-    {
-        mAdapter.add(new Prescription());
     }
 
     @Override

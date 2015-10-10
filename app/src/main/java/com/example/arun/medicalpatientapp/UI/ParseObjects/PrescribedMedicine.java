@@ -36,6 +36,10 @@ public class PrescribedMedicine extends ParseObject
         put("times_a_day", timesADay);
     }
 
+    public Medicine getMedicine() {
+        return (Medicine) get("medicine");
+    }
+
     public void setMedicine(Medicine medicine) {
         put("medicine", medicine);
     }

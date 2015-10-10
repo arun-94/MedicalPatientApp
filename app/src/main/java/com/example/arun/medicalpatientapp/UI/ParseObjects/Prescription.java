@@ -14,9 +14,9 @@ public class Prescription extends ParseObject
     {
     }
 
-    public ParseUser getDoctorID()
+    public User getDoctorID()
     {
-        return (ParseUser) get("doctor_id");
+        return (User) get("doctor_id");
     }
 
     @SuppressWarnings("unchecked")

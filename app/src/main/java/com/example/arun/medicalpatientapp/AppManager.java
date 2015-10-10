@@ -65,7 +65,10 @@ public class AppManager extends Application
         ParseQuery<Prescription> query = Prescription.getQuery();
 
         query.whereEqualTo("patient_id", ParseUser.getCurrentUser());
-
+        query.include("doctor_id");
+        query.include("patient_id");
+        query.include("medicine_ids");
+        query.include("medicine_ids.medicine");
         query.findInBackground(new FindCallback<Prescription>()
         {
             @Override

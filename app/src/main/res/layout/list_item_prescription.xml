@@ -12,9 +12,9 @@
               android:paddingRight="8dp"
               android:paddingTop="8dp">
 
-    <com.example.arun.medicalpatientapp.UI.Custom.ProfilePictureView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/prescription_profile_pic"
-        com_facebook_preset_size="small"
+        android:src="@drawable/com_facebook_profile_picture_blank_portrait"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"/>
@@ -39,8 +39,7 @@
             android:gravity="top"
             android:maxLines="1"
             android:paddingTop="8dp"
-            android:text="Arun Swaminathan"
-            android:textAppearance="@style/Klassy_TextStyle_Title"/>
+            android:text="Arun Swaminathan"/>
 
         <TextView
             android:id="@+id/prescription_details"
@@ -54,7 +53,7 @@
             android:gravity="bottom"
             android:text="Mohit Nimbalkar"
             android:textAlignment="gravity"
-            android:textAppearance="@style/Klassy_TextStyle_Subtitle"/>
+            android:ellipsize="end"/>
 
         <LinearLayout
             android:id="@+id/right_side_layout"
@@ -83,8 +82,7 @@
                 android:maxWidth="100dp"
                 android:paddingTop="8dp"
                 android:text="10 weeks ago"
-                android:textAlignment="gravity"
-                android:textAppearance="@style/Klassy_TextStyle_Subtitle"/>
+                android:textAlignment="gravity"/>
         </LinearLayout>
 
     </RelativeLayout>

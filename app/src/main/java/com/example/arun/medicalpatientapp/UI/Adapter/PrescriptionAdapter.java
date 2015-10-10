@@ -1,17 +1,26 @@
 package com.example.arun.medicalpatientapp.UI.Adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.arun.medicalpatientapp.ImageUtility;
 import com.example.arun.medicalpatientapp.R;
 import com.example.arun.medicalpatientapp.UI.ParseObjects.Prescription;
+import com.parse.GetDataCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapter.VHMedicineItem>
 {
@@ -79,13 +88,35 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
     }
 
     @Override
-    public void onBindViewHolder(VHMedicineItem holder, final int position)
+    public void onBindViewHolder(final VHMedicineItem holder, final int position)
     {
         Prescription prescription = mData.get(position);
 
         if (prescription != null)
         {
-            //((VHMedicineItem) holder).storeCategoryImage.setI(storeItem.getUser().getUsername());
+            ((VHMedicineItem) holder).doctorName.setText(prescription.getDoctorID().getString("name"));
+            String medicineCSV = "";
+            for(int i = 0; i < prescription.getMedicineList().size() - 1; i++) {
+                medicineCSV += prescription.getMedicineList().get(i).getMedicine().getMedicineName() + ", ";
+            }
+
+            medicineCSV += prescription.getMedicineList().get(prescription.getMedicineList().size() - 1).getMedicine().getMedicineName();
+
+            ((VHMedicineItem) holder).medicineNames.setText(medicineCSV);
+
+            Date d1 = prescription.getCreatedAt();
+            ((VHMedicineItem) holder).prescriptionDate.setText("" + d1.getDate() + "/" + d1.getMonth() + "/2015");
+
+            ParseFile pf = prescription.getDoctorID().getProfilePic();
+            pf.getDataInBackground(new GetDataCallback()
+            {
+                @Override
+                public void done(byte[] bytes, ParseException e)
+                {
+                    Bitmap bm = ImageUtility.decodeSampledBitmapFromByte(mContext, bytes);
+                    holder.doctorPicture.setImageBitmap(bm);
+                }
+            });
         }
     }
 
@@ -121,10 +152,18 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
 
     public static class VHMedicineItem extends RecyclerView.ViewHolder
     {
+        TextView doctorName;
+        TextView medicineNames;
+        TextView prescriptionDate;
+        CircleImageView doctorPicture;
+
         public VHMedicineItem(View view)
         {
             super(view);
-
+            doctorName = (TextView) view.findViewById(R.id.prescription_patient_name);
+            medicineNames = (TextView) view.findViewById(R.id.prescription_details);
+            prescriptionDate = (TextView) view.findViewById(R.id.prescription_date);
+            doctorPicture = (CircleImageView) view.findViewById(R.id.prescription_profile_pic);
         }
     }
 }

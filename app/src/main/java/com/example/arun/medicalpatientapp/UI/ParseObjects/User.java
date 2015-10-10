@@ -72,4 +72,8 @@ public class User extends ParseUser
         put("age", Integer.parseInt(age));
 
     }
+
+    public ParseFile getProfilePic() {
+        return (ParseFile) getParseFile("profile_pic");
+    }
 }
