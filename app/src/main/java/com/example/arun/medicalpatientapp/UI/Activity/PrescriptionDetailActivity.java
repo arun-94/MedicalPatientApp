@@ -72,6 +72,12 @@ public class PrescriptionDetailActivity extends BaseActivity
         startActivity(callIntent);
     }
 
+    @OnClick(R.id.button_set_reminder)
+    void setReminder()
+    {
+        Toast.makeText(PrescriptionDetailActivity.this, "Reminder feature currently not available", Toast.LENGTH_SHORT).show();
+    }
+
     @OnClick(R.id.button_share_prescription)
     void sharePresc()
     {

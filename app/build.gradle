@@ -31,5 +31,4 @@ dependencies {
     compile 'com.rengwuxian.materialedittext:library:2.0.3'
     compile 'com.facebook.android:facebook-android-sdk:4.7.0'
     compile 'de.hdodenhof:circleimageview:1.2.1'
-
 }

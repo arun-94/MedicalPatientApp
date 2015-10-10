@@ -113,6 +113,25 @@
                 />
         </FrameLayout>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/signal_green"
+            android:layout_weight="1"
+            >
+
+            <Button
+                android:id="@+id/button_set_reminder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="?android:attr/selectableItemBackground"
+                android:text="SET REMINDER"
+                android:textColor="@color/white"
+                />
+        </FrameLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
