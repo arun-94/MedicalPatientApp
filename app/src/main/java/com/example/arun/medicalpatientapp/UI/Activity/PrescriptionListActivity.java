@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.arun.medicalpatientapp.Constants;
 import com.example.arun.medicalpatientapp.R;
@@ -20,6 +21,8 @@ public class PrescriptionListActivity extends BaseActivity
 {
 
     @Bind(R.id.prescription_recycler) RecyclerView mRecyclerView;
+    @Bind(R.id.progress_view) ProgressBar progressLoading;
+
     private PrescriptionAdapter mAdapter;
 
     @Override
@@ -45,6 +48,7 @@ public class PrescriptionListActivity extends BaseActivity
     @Override
     protected void setupLayout()
     {
+        progressLoading.setVisibility(View.VISIBLE);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -69,6 +73,7 @@ public class PrescriptionListActivity extends BaseActivity
         Log.d("Process", "Process finished");
         if (type == Constants.TYPE_RECIEVED_PRESCRIPTIONS)
         {
+            progressLoading.setVisibility(View.INVISIBLE);
             Log.d("Process", "Adding items");
             mAdapter.addItems(manager.currentPatientPrescriptions);
         }
