@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 
+import com.example.arun.medicalpatientapp.Constants;
 import com.example.arun.medicalpatientapp.R;
 import com.example.arun.medicalpatientapp.UI.ParseObjects.User;
 import com.facebook.AccessToken;
@@ -63,18 +64,22 @@ public class LoginActivity extends BaseActivity
         List<String> permissions = Arrays.asList("public_profile", "user_friends", "user_birthday");
 
         //Run code to get hash key in log
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.example.arun.medicalpatientapp",
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
+        try
+        {
+            PackageInfo info = getPackageManager().getPackageInfo("com.example.arun.medicalpatientapp", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures)
+            {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
                 Log.d("Your Tag", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
-        } catch (PackageManager.NameNotFoundException e) {
+        }
+        catch (PackageManager.NameNotFoundException e)
+        {
             Log.d("error", "" + e);
-        } catch (NoSuchAlgorithmException e) {
+        }
+        catch (NoSuchAlgorithmException e)
+        {
             Log.d("error", "" + e);
         }
 
@@ -112,12 +117,14 @@ public class LoginActivity extends BaseActivity
     @OnClick(R.id.loginButton)
     void onLoginClick()
     {
+        Log.d("LOGIN", "Clicked Test Login");
         ParseUser.logInInBackground("TestPatient", "test123", new LogInCallback()
         {
             public void done(ParseUser user, ParseException e)
             {
                 if (user != null)
                 {
+                    Log.d("LOGIN", "Got test user");
                     manager.setUpPush(user);
                     manager.getAllPrescriptionsFromCurrentPatient();
                     gotoMainActivity();
@@ -165,15 +172,21 @@ public class LoginActivity extends BaseActivity
                         if (jsonObject.getString("gender") != null)
                         {
                             if (jsonObject.getString("gender").equals("male"))
+                            {
                                 currentUser.setIsMale(true);
-                            else currentUser.setIsMale(false);
+                            }
+                            else
+                            {
+                                currentUser.setIsMale(false);
+                            }
 
                         }
 
                         currentUser.setIsDoctor(false);
 
                         currentUser.saveInBackground();
-                    } catch (JSONException e)
+                    }
+                    catch (JSONException e)
                     {
                         Log.d(LOG_TAG, "Error parsing returned user data. " + e);
                     }
@@ -229,9 +242,18 @@ public class LoginActivity extends BaseActivity
     {
         // manager.fetchDataFromParse();
 
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, PrescriptionListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        Log.d("LOGIN", "Going to main activity");
+    }
+
+    @Override
+    public void processFinish(String result, int type)
+    {
+        if(type == Constants.TYPE_RECIEVED_PRESCRIPTIONS)
+        {
+        }
     }
 
 }

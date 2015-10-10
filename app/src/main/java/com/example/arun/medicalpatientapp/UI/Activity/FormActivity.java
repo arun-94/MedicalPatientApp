@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.example.arun.medicalpatientapp.Constants;
 import com.example.arun.medicalpatientapp.R;
 import com.example.arun.medicalpatientapp.UI.ParseObjects.User;
 import com.parse.ParseUser;
@@ -89,8 +90,16 @@ public class FormActivity extends BaseActivity
     {
         // manager.fetchDataFromParse();
 
-        Intent intent = new Intent(FormActivity.this, MainActivity.class);
+        Intent intent = new Intent(FormActivity.this, PrescriptionListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public void processFinish(String result, int type)
+    {
+        if(type == Constants.TYPE_RECIEVED_PRESCRIPTIONS)
+        {
+        }
     }
 }

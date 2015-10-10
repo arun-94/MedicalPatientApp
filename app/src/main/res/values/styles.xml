@@ -1,30 +1,30 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary_brown</item>
-        <item name="colorPrimaryDark">@color/primary_dark_brown</item>
-        <item name="colorAccent">@color/accent_brown</item>
+        <item name="colorPrimary">@color/app_primary</item>
+        <item name="colorPrimaryDark">@color/app_primary_dark</item>
+        <item name="colorAccent">@color/app_accent</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowActionBarOverlay">false</item>
     </style>
 
     <style name="AppThemeNavDrawer" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary_brown</item>
-        <item name="colorPrimaryDark">@color/primary_dark_brown</item>
-        <item name="colorAccent">@color/accent_brown</item>
+        <item name="colorPrimary">@color/app_primary</item>
+        <item name="colorPrimaryDark">@color/app_primary_dark</item>
+        <item name="colorAccent">@color/app_accent</item>
         <item name="android:windowActionBar">false</item>
-        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
-        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="AppThemeWhite" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary_brown</item>
+        <item name="colorPrimary">@color/app_primary</item>
         <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/accent_brown</item>
+        <item name="colorAccent">@color/app_accent</item>
         <item name="android:windowActionBar">false</item>
     </style>
 
@@ -56,7 +56,7 @@
     </style>
 
     <style name="Tisser_TextStyle_Subtitle" parent="@android:style/Widget.TextView">
-        <item name="android:textColor">@color/primary_brown</item>
+        <item name="android:textColor">@color/app_primary</item>
         <item name="android:textSize">14sp</item>
     </style>
 
@@ -86,5 +86,16 @@
         <item name="android:layout_height">1dp</item>
         <item name="android:background">?android:attr/listDivider</item>
     </style>
+
+    <style name="Klassy_TextStyle_Subtitle" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/grey_klassy</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Klassy_TextStyle_Title" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 
 </resources>

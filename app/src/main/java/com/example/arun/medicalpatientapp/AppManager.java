@@ -24,6 +24,7 @@ public class AppManager extends Application
 {
 
     public ArrayList<Prescription> currentPatientPrescriptions = new ArrayList<>();
+    public AsyncResponse delegate = null;
 
     @Override
     public void onCreate()
@@ -70,8 +71,11 @@ public class AppManager extends Application
             @Override
             public void done(List<Prescription> list, ParseException e)
             {
-                if(e == null) {
+                if(e == null)
+                {
+                    Log.d("Manager", "Size of list ; " + list.size());
                     currentPatientPrescriptions.addAll(list);
+                    delegate.processFinish("manager", Constants.TYPE_RECIEVED_PRESCRIPTIONS);
                 }
                 else {
                     Log.d("AppManager", e.getMessage());
