@@ -107,7 +107,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
             Date d1 = prescription.getCreatedAt();
             ((VHMedicineItem) holder).prescriptionDate.setText("" + d1.getDate() + "/" + d1.getMonth() + "/2015");
 
-            ParseFile pf = prescription.getDoctorID().getProfilePic();
+/*            ParseFile pf = prescription.getDoctorID().getProfilePic();
             pf.getDataInBackground(new GetDataCallback()
             {
                 @Override
@@ -116,7 +116,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
                     Bitmap bm = ImageUtility.decodeSampledBitmapFromByte(mContext, bytes);
                     holder.doctorPicture.setImageBitmap(bm);
                 }
-            });
+            });*/
         }
     }
 

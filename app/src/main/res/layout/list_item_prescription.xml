@@ -14,7 +14,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/prescription_profile_pic"
-        android:src="@drawable/com_facebook_profile_picture_blank_portrait"
+        android:src="@drawable/download"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"/>
