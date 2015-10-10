@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.arun.medicalpatientapp.AppManager;
 import com.example.arun.medicalpatientapp.R;
 import com.example.arun.medicalpatientapp.UI.ParseObjects.User;
 import com.facebook.AccessToken;
@@ -26,7 +25,6 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity
 {
     private String LOG_TAG = "LoginActivity";
-    AppManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -73,11 +71,14 @@ public class LoginActivity extends BaseActivity
                     if (user.isNew())
                     {
                         Log.d(LOG_TAG, "User signed up and logged in through Facebook!");
+                        manager.setUpPush();
                         fetchDataFromFB();
                     }
                     else
                     {
                         Log.d("ho", "User logged in through Facebook!");
+                        manager.setUpPush();
+                        manager.getAllPrescriptionsFromCurrentPatient();
                         fetchDataFromFB();
                     }
                 }
@@ -94,6 +95,8 @@ public class LoginActivity extends BaseActivity
             {
                 if (user != null)
                 {
+                    manager.setUpPush();
+                    manager.getAllPrescriptionsFromCurrentPatient();
                     gotoMainActivity();
                 }
                 else
