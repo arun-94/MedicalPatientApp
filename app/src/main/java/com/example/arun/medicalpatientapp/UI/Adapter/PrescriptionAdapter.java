@@ -160,7 +160,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
         public VHMedicineItem(View view)
         {
             super(view);
-            doctorName = (TextView) view.findViewById(R.id.prescription_patient_name);
+            doctorName = (TextView) view.findViewById(R.id.prescription_age_gender);
             medicineNames = (TextView) view.findViewById(R.id.prescription_details);
             prescriptionDate = (TextView) view.findViewById(R.id.prescription_date);
             doctorPicture = (CircleImageView) view.findViewById(R.id.prescription_profile_pic);

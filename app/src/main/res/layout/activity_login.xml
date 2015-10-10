@@ -48,27 +48,57 @@
             android:orientation="vertical"
             android:elevation="10dp">
 
-            <Button
-                android:id="@+id/fbLoginButton"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="fill_parent"
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/com_facebook_blue"
-                android:text="Login with Facebook"
-                android:textAllCaps="true"
-                android:textColor="@android:color/white"
-                />
+                android:elevation="5dp"
+                android:layout_marginTop="20dp">
 
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:id="@+id/loginButton"
-                android:layout_width="fill_parent"
+                <Button
+                    android:id="@+id/fbLoginButton"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:text="Login with Facebook"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/com_facebook_button_like_background_color_selected"
-                android:text="Test Patient Login"
-                android:textAllCaps="true"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="10dp"/>
+                android:background="@color/app_primary"
+                android:elevation="5dp"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:id="@+id/loginButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:text="Test Patient Login"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    />
+
+                <ProgressBar
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/progress_view"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:indeterminate="true"
+                    android:layout_gravity="center"
+                    android:progressTint="@color/white"
+                    android:indeterminateTint="@color/white"
+                    android:progressBackgroundTint="@color/white"
+                    />
+            </FrameLayout>
+
+
 
         </LinearLayout>
 

@@ -4,23 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
-import com.example.arun.medicalpatientapp.Constants;
 import com.example.arun.medicalpatientapp.R;
+import com.example.arun.medicalpatientapp.UI.Adapter.PrescribedMedicineAdapter;
 import com.example.arun.medicalpatientapp.UI.Adapter.PrescriptionAdapter;
 import com.example.arun.medicalpatientapp.UI.Custom.RecyclerItemClickListener;
-import com.example.arun.medicalpatientapp.UI.ParseObjects.Prescription;
 
 import butterknife.Bind;
-import butterknife.OnClick;
 
-public class PrescriptionListActivity extends BaseActivity
+/**
+ * Created by Puneet on 10-10-2015.
+ */
+public class PrescriptionDetailActivity extends BaseActivity
 {
-
     @Bind(R.id.prescription_recycler) RecyclerView mRecyclerView;
-    private PrescriptionAdapter mAdapter;
+    PrescribedMedicineAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,13 +31,12 @@ public class PrescriptionListActivity extends BaseActivity
     @Override
     protected int getLayoutResource()
     {
-        return R.layout.activity_prescription_list;
+        return R.layout.activity_prescription_details;
     }
 
     @Override
     protected void setupToolbar()
     {
-        toolbar.setTitle("My Prescriptions");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -49,30 +47,17 @@ public class PrescriptionListActivity extends BaseActivity
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
-        mAdapter = new PrescriptionAdapter(PrescriptionListActivity.this, null);
+        mAdapter = new PrescribedMedicineAdapter(PrescriptionDetailActivity.this, manager.selectedPrescription.getMedicineList());
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(PrescriptionListActivity.this, new RecyclerItemClickListener.OnItemClickListener()
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(PrescriptionDetailActivity.this, new RecyclerItemClickListener.OnItemClickListener()
         {
             @Override
             public void onItemClick(View view, int itempos)
             {
-                manager.selectedPrescription = manager.currentPatientPrescriptions.get(itempos);
-                Intent productListIntent = new Intent(PrescriptionListActivity.this, PrescriptionDetailActivity.class);
+                Intent productListIntent = new Intent(PrescriptionDetailActivity.this, PrescriptionDetailActivity.class);
                 startActivity(productListIntent);
             }
         }));
     }
-
-    @Override
-    public void processFinish(String result, int type)
-    {
-        Log.d("Process", "Process finished");
-        if (type == Constants.TYPE_RECIEVED_PRESCRIPTIONS)
-        {
-            Log.d("Process", "Adding items");
-            mAdapter.addItems(manager.currentPatientPrescriptions);
-        }
-    }
-
-
 }
+

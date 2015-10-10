@@ -3,6 +3,9 @@ package com.example.arun.medicalpatientapp.UI.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.example.arun.medicalpatientapp.Constants;
 import com.example.arun.medicalpatientapp.R;
@@ -21,11 +24,14 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.List;
 
+import butterknife.Bind;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity
 {
     private String LOG_TAG = "LoginActivity";
+    @Bind(R.id.progress_view) ProgressBar progressLoading;
+    @Bind (R.id.loginButton) Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,7 +55,7 @@ public class LoginActivity extends BaseActivity
     @Override
     protected void setupLayout()
     {
-
+        progressLoading.setVisibility(View.INVISIBLE);
     }
 
     @OnClick(R.id.fbLoginButton)
@@ -106,6 +112,8 @@ public class LoginActivity extends BaseActivity
     @OnClick(R.id.loginButton)
     void onLoginClick()
     {
+        progressLoading.setVisibility(View.VISIBLE);
+        loginButton.setText("");
         Log.d("LOGIN", "Clicked Test Login");
         ParseUser.logInInBackground("TestPatient", "test123", new LogInCallback()
         {
@@ -114,6 +122,7 @@ public class LoginActivity extends BaseActivity
                 if (user != null)
                 {
                     Log.d("LOGIN", "Got test user");
+
                     manager.setUpPush(user);
                     manager.getAllPrescriptionsFromCurrentPatient();
                     gotoMainActivity();
@@ -236,7 +245,8 @@ public class LoginActivity extends BaseActivity
     private void gotoMainActivity()
     {
         // manager.fetchDataFromParse();
-
+        progressLoading.setVisibility(View.INVISIBLE);
+        loginButton.setText("Test Patient Login");
         Intent intent = new Intent(LoginActivity.this, PrescriptionListActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

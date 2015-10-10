@@ -29,12 +29,12 @@
 
 
         <TextView
-            android:id="@+id/prescription_patient_name"
+            android:id="@+id/prescription_age_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/right_side_layout"
+            android:layout_toLeftOf="@+id/notes_layout"
             android:ellipsize="end"
             android:gravity="top"
             android:maxLines="1"
@@ -45,10 +45,10 @@
             android:id="@+id/prescription_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/prescription_patient_name"
+            android:layout_alignLeft="@+id/prescription_age_gender"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignStart="@+id/prescription_patient_name"
+            android:layout_alignStart="@+id/prescription_age_gender"
             android:layout_marginTop="2dp"
             android:gravity="bottom"
             android:text="Mohit Nimbalkar"
@@ -56,14 +56,14 @@
             android:ellipsize="end"/>
 
         <LinearLayout
-            android:id="@+id/right_side_layout"
+            android:id="@+id/notes_layout"
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_alignTop="@+id/prescription_patient_name"
+            android:layout_alignTop="@+id/prescription_age_gender"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="16dp"
             android:layout_weight="0"

@@ -25,6 +25,7 @@ public class AppManager extends Application
 
     public ArrayList<Prescription> currentPatientPrescriptions = new ArrayList<>();
     public AsyncResponse delegate = null;
+    public Prescription selectedPrescription;
 
     @Override
     public void onCreate()
