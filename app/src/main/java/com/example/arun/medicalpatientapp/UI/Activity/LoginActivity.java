@@ -64,20 +64,20 @@ public class LoginActivity extends BaseActivity
                 //Log.d("ho", "Here");
                 if (user == null)
                 {
-                    Log.d(LOG_TAG, "Uh oh. The user cancelled the Facebook login.");
+                    Log.e(LOG_TAG, "Uh oh. The user cancelled the Facebook login.");
                 }
                 else
                 {
                     if (user.isNew())
                     {
                         Log.d(LOG_TAG, "User signed up and logged in through Facebook!");
-                        manager.setUpPush();
+                        manager.setUpPush(user);
                         fetchDataFromFB();
                     }
                     else
                     {
                         Log.d("ho", "User logged in through Facebook!");
-                        manager.setUpPush();
+                        manager.setUpPush(user);
                         manager.getAllPrescriptionsFromCurrentPatient();
                         fetchDataFromFB();
                     }
@@ -95,12 +95,13 @@ public class LoginActivity extends BaseActivity
             {
                 if (user != null)
                 {
-                    manager.setUpPush();
+                    manager.setUpPush(user);
                     manager.getAllPrescriptionsFromCurrentPatient();
                     gotoMainActivity();
                 }
                 else
                 {
+                    Log.d(LOG_TAG, e.getMessage());
                     // Signup failed. Look at the ParseException to see what happened.
                 }
             }

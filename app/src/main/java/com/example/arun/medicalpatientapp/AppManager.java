@@ -15,6 +15,7 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +42,22 @@ public class AppManager extends Application
 
     }
 
-    public void setUpPush() {
+    public void setUpPush(ParseUser user) {
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-        installation.put("username", ParseUser.getCurrentUser().getUsername());
-        installation.saveInBackground();
+        installation.put("username", user.getUsername());
+        installation.saveInBackground(new SaveCallback()
+        {
+            @Override
+            public void done(ParseException e)
+            {
+                if(e == null) {
+                    Log.d("AppManager", "Push Init Complete");
+                }
+                else {
+                    Log.e("AppManager", e.getMessage());
+                }
+            }
+        });
     }
 
     public void getAllPrescriptionsFromCurrentPatient() {
