@@ -78,6 +78,7 @@ public class AppManager extends Application
                 if(e == null)
                 {
                     Log.d("Manager", "Size of list ; " + list.size());
+                    currentPatientPrescriptions.clear();
                     currentPatientPrescriptions.addAll(list);
                     delegate.processFinish("manager", Constants.TYPE_RECIEVED_PRESCRIPTIONS);
                 }
