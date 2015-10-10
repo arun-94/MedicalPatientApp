@@ -31,7 +31,10 @@ public class User extends ParseUser
     }
 
     public String getPhone() {
-        return getString("phone");
+        if(getString("phone") != null)
+            return getString("phone");
+        else
+            return "";
     }
 
     public String getAddress() {
