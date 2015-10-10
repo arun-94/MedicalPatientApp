@@ -47,7 +47,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@color/accent_brown"
+            android:src="@drawable/download"
             android:layout_toLeftOf="@+id/linearLayout"
             android:layout_marginRight="16dp"/>
     </RelativeLayout>
