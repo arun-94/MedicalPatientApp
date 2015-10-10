@@ -1,6 +1,9 @@
 package com.example.arun.medicalpatientapp.UI.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -34,10 +37,16 @@ public class LoginActivity extends BaseActivity
     @Bind(R.id.progress_view) ProgressBar progressLoading;
     @Bind (R.id.loginButton) Button loginButton;
 
+    ConnectivityManager cm;
+    NetworkInfo ni;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ni = cm.getActiveNetworkInfo();
         ParseFacebookUtils.initialize(this);
     }
 
@@ -62,9 +71,11 @@ public class LoginActivity extends BaseActivity
     @OnClick(R.id.fbLoginButton)
     void onFBLoginClick()
     {
-        List<String> permissions = Arrays.asList("public_profile", "user_friends", "user_birthday");
+        if ((ni != null) && (ni.isConnected()))
+        {
+            List<String> permissions = Arrays.asList("public_profile", "user_friends", "user_birthday");
 
-        //Run code to get hash key in log
+            //Run code to get hash key in log
         /*try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.example.arun.medicalpatientapp",
@@ -80,63 +91,74 @@ public class LoginActivity extends BaseActivity
             Log.d("error", "" + e);
         }*/
 
-        ParseFacebookUtils.logInWithReadPermissionsInBackground(this, permissions, new LogInCallback()
-        {
-            @Override
-            public void done(ParseUser user, ParseException err)
+            ParseFacebookUtils.logInWithReadPermissionsInBackground(this, permissions, new LogInCallback()
             {
-                //Log.d("ho", "Here");
-                if (user == null)
+                @Override
+                public void done(ParseUser user, ParseException err)
                 {
-                    Log.e(LOG_TAG, "Uh oh. The user cancelled the Facebook login.");
-                    Toast.makeText(LoginActivity.this, "No Internet. Login Failed.", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    if (user.isNew())
+                    //Log.d("ho", "Here");
+                    if (user == null)
                     {
-                        Log.d(LOG_TAG, "User signed up and logged in through Facebook!");
-                        manager.setUpPush(user);
-                        fetchDataFromFB();
+                        Log.e(LOG_TAG, "Uh oh. The user cancelled the Facebook login.");
+                        Toast.makeText(LoginActivity.this, "No Internet. Login Failed.", Toast.LENGTH_SHORT).show();
                     }
                     else
                     {
-                        Log.d("ho", "User logged in through Facebook!");
-                        manager.setUpPush(user);
-                        manager.getAllPrescriptionsFromCurrentPatient();
-                        fetchDataFromFB();
+                        if (user.isNew())
+                        {
+                            Log.d(LOG_TAG, "User signed up and logged in through Facebook!");
+                            manager.setUpPush(user);
+                            fetchDataFromFB();
+                        }
+                        else
+                        {
+                            Log.d("ho", "User logged in through Facebook!");
+                            manager.setUpPush(user);
+                            manager.getAllPrescriptionsFromCurrentPatient();
+                            fetchDataFromFB();
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
+        else {
+            Toast.makeText(LoginActivity.this, "No Internet Access", Toast.LENGTH_SHORT);
+        }
     }
 
     @OnClick(R.id.loginButton)
     void onLoginClick()
     {
-        progressLoading.setVisibility(View.VISIBLE);
-        loginButton.setText("");
-        Log.d("LOGIN", "Clicked Test Login");
-        ParseUser.logInInBackground("TestPatient", "test123", new LogInCallback()
+        if ((ni != null) && (ni.isConnected()))
         {
-            public void done(ParseUser user, ParseException e)
+            progressLoading.setVisibility(View.VISIBLE);
+            loginButton.setText("");
+            Log.d("LOGIN", "Clicked Test Login");
+            ParseUser.logInInBackground("TestPatient", "test123", new LogInCallback()
             {
-                if (user != null)
+                public void done(ParseUser user, ParseException e)
                 {
-                    Log.d("LOGIN", "Got test user");
+                    if (user != null)
+                    {
+                        Log.d("LOGIN", "Got test user");
 
-                    manager.setUpPush(user);
-                    manager.getAllPrescriptionsFromCurrentPatient();
-                    gotoMainActivity();
+                        manager.setUpPush(user);
+                        manager.getAllPrescriptionsFromCurrentPatient();
+                        gotoMainActivity();
+                    }
+                    else
+                    {
+                        Log.d(LOG_TAG, "Login Failed" + e.getMessage());
+                        Toast.makeText(LoginActivity.this, "No Internet. Login Failed.", Toast.LENGTH_SHORT).show();
+                        // Signup failed. Look at the ParseException to see what happened.
+                        gotoMainActivityOffline();
+                    }
                 }
-                else
-                {
-                    Log.d(LOG_TAG, "Login Failed" + e.getMessage());
-                    Toast.makeText(LoginActivity.this, "No Internet. Login Failed.", Toast.LENGTH_SHORT).show();
-                    // Signup failed. Look at the ParseException to see what happened.
-                }
-            }
-        });
+            });
+        }
+        else {
+            gotoMainActivityOffline();
+        }
     }
 
 
@@ -186,8 +208,7 @@ public class LoginActivity extends BaseActivity
                         currentUser.setIsDoctor(false);
 
                         currentUser.saveInBackground();
-                    }
-                    catch (JSONException e)
+                    } catch (JSONException e)
                     {
                         Log.d(LOG_TAG, "Error parsing returned user data. " + e);
                     }
@@ -251,6 +272,17 @@ public class LoginActivity extends BaseActivity
         progressLoading.setVisibility(View.INVISIBLE);
         loginButton.setText("Test Patient Login");
         Intent intent = new Intent(LoginActivity.this, PrescriptionListActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        Log.d("LOGIN", "Going to main activity");
+    }
+
+    private void gotoMainActivityOffline()
+    {
+        // manager.fetchDataFromParse();
+        progressLoading.setVisibility(View.INVISIBLE);
+        loginButton.setText("Test Patient Login");
+        Intent intent = new Intent(LoginActivity.this, PrescriptionListActivityOffline.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         Log.d("LOGIN", "Going to main activity");

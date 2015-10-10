@@ -4,4 +4,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">637699976333556</string>
+    <string name="title_activity_prescription_list_activity_offline">
+        PrescriptionListActivityOffline
+    </string>
 </resources>
