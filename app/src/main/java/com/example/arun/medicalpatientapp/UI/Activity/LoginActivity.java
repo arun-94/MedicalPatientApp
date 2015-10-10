@@ -65,7 +65,7 @@ public class LoginActivity extends BaseActivity
         //Run code to get hash key in log
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.refocus.puneet.axishackathon",
+                    "com.example.arun.medicalpatientapp",
                     PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
