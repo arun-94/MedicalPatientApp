@@ -12,7 +12,6 @@ import com.example.arun.medicalpatientapp.UI.ParseObjects.Prescription;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapter.VHMedicineItem>
 {
@@ -26,7 +25,7 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
         mContext = context;
         if (prescriptions == null)
         {
-            mData = new ArrayList<Prescription>();
+            mData = new ArrayList<>();
         }
         else
         {
@@ -40,13 +39,13 @@ public class PrescriptionAdapter extends RecyclerView.Adapter<PrescriptionAdapte
         Log.d("Process", "size of prescription : "+  prescriptionArrayList.size());
         mData.clear();
         //arraylist.clear();
-        for(int i = 0; i < prescriptionArrayList.size(); i++)
+        /*for(int i = 0; i < prescriptionArrayList.size(); i++)
         {
             add(prescriptionArrayList.get(i));
-        }
-        //mData.addAll(prescriptionArrayList);
+        }*/
+        mData.addAll(prescriptionArrayList);
         //arraylist.addAll(newStores);
-        //notifyDataSetChanged();
+        notifyDataSetChanged();
         Log.d("Process", "Added to adapter");
     }
 

@@ -46,7 +46,7 @@ public class PrescriptionListActivity extends BaseActivity
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(llm);
-        mAdapter = new PrescriptionAdapter(PrescriptionListActivity.this, manager.currentPatientPrescriptions);
+        mAdapter = new PrescriptionAdapter(PrescriptionListActivity.this, null);
         mRecyclerView.setAdapter(mAdapter);
     }
 
