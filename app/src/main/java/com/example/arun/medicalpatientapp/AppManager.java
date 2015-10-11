@@ -96,6 +96,7 @@ public class AppManager extends Application
                     }
                     else
                     {
+                        delegate.processFinish("manager", Constants.TYPE_RECIEVED_PRESCRIPTIONS);
                         Log.d("AppManager", e.getMessage());
                     }
                 }

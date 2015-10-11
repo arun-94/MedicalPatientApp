@@ -100,7 +100,7 @@ public class LoginActivity extends BaseActivity
                     if (user == null)
                     {
                         Log.e(LOG_TAG, "Uh oh. The user cancelled the Facebook login.");
-                        Toast.makeText(LoginActivity.this, "No Internet. Login Failed.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Login failed. Facebook Not working.", Toast.LENGTH_SHORT).show();
                     }
                     else
                     {

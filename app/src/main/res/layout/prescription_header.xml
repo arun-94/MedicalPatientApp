@@ -39,7 +39,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:paddingTop="8dp"
-            android:text="Dr. Arun Swaminathan"
+            android:text="Dr. Sarah Testing"
             android:textAlignment="gravity"
             android:textAppearance="@style/Klassy_TextStyle_Title"
             android:textStyle="italic|bold"/>

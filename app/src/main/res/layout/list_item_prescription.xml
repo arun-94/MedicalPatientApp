@@ -39,7 +39,8 @@
             android:gravity="top"
             android:maxLines="1"
             android:paddingTop="8dp"
-            android:text="Arun Swaminathan"/>
+            android:text="Arun Swaminathan"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/prescription_details"

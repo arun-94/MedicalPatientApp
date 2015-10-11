@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.arun.medicalpatientapp.R;
 import com.example.arun.medicalpatientapp.UI.Adapter.PrescribedMedicineAdapter;
 import com.example.arun.medicalpatientapp.UI.Adapter.PrescriptionAdapter;
 import com.example.arun.medicalpatientapp.UI.Custom.RecyclerItemClickListener;
+import com.parse.ParseUser;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -24,6 +26,9 @@ public class PrescriptionDetailActivity extends BaseActivity
 {
     @Bind(R.id.prescription_recycler) RecyclerView mRecyclerView;
     PrescribedMedicineAdapter mAdapter;
+    @Bind(R.id.prescription_age_gender) TextView ageGender;
+    @Bind(R.id.prescription_name) TextView name;
+    @Bind(R.id.prescription_date) TextView date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,6 +52,11 @@ public class PrescriptionDetailActivity extends BaseActivity
     @Override
     protected void setupLayout()
     {
+        String s = "M";
+        if(!ParseUser.getCurrentUser().getBoolean("is_male") == true)
+            s = "F";
+        ageGender.setText(ParseUser.getCurrentUser().getInt("age") + "/" + s);
+        name.setText(ParseUser.getCurrentUser().getString("name"));
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);

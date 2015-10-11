@@ -41,4 +41,16 @@
         android:layout_gravity="center"
         />
 
+
+    <TextView
+        android:id="@+id/prescription_not_there_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:text="You have no prescriptions! You're a healthy person :-)"
+        android:textAlignment="gravity"/>
+
 </android.support.design.widget.CoordinatorLayout>

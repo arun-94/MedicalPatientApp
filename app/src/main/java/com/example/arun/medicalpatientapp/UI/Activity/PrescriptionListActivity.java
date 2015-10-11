@@ -7,12 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.arun.medicalpatientapp.Constants;
 import com.example.arun.medicalpatientapp.R;
 import com.example.arun.medicalpatientapp.UI.Adapter.PrescriptionAdapter;
 import com.example.arun.medicalpatientapp.UI.Custom.RecyclerItemClickListener;
 import com.example.arun.medicalpatientapp.UI.ParseObjects.Prescription;
+
+import org.w3c.dom.Text;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -22,6 +25,7 @@ public class PrescriptionListActivity extends BaseActivity
 
     @Bind(R.id.prescription_recycler) RecyclerView mRecyclerView;
     @Bind(R.id.progress_view) ProgressBar progressLoading;
+    @Bind(R.id.prescription_not_there_text) TextView notThereText;
 
     private PrescriptionAdapter mAdapter;
 
@@ -49,6 +53,8 @@ public class PrescriptionListActivity extends BaseActivity
     protected void setupLayout()
     {
         progressLoading.setVisibility(View.VISIBLE);
+        notThereText.setVisibility(View.INVISIBLE);
+
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -74,6 +80,10 @@ public class PrescriptionListActivity extends BaseActivity
         if (type == Constants.TYPE_RECIEVED_PRESCRIPTIONS)
         {
             progressLoading.setVisibility(View.INVISIBLE);
+            if(manager.currentPatientPrescriptions.size() == 0)
+            {
+                notThereText.setVisibility(View.VISIBLE);
+            }
             Log.d("Process", "Adding items");
             mAdapter.addItems(manager.currentPatientPrescriptions);
         }
